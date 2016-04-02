@@ -10,4 +10,3 @@ Required libraries:
 - Boost ASIO (Networking) http://www.boost.org/
 - Protobuf 3+ (Network serialization) https://github.com/google/protobuf
 - ...
-- 
