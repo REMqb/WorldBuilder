@@ -1,0 +1,54 @@
+syntax = "proto3";
+package  wb;
+
+option java_package = "worldbuilder.protocol";
+option optimize_for = SPEED;
+
+message ServerToClient {
+
+}
+
+message ClientToServer{
+
+}
+
+///////////////// TYPES /////////////////
+
+message Transform {
+    Vector3f position = 1;
+    Vector4f orientation = 2;
+    Vector3f scale = 3;
+}
+
+message Vector4f {
+    double x = 1;
+    float y = 2;
+    float z = 3;
+    float w = 4;
+}
+
+message Vector3f {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Projection {
+    enum ProjectionType {
+        PERSPECTIVE = 0;
+        ORTHOGONAL = 1;
+    }
+
+    ProjectionType type = 1;
+
+    float angle = 2;
+    int32 width = 3;
+    int32 height = 4;
+
+    int32 left = 5;
+    int32 right = 6;
+    int32 top = 7;
+    int32 bottom = 8;
+    float near = 9;
+    float far = 10;
+}

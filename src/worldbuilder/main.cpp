@@ -4,17 +4,32 @@
 
 #include <SFML/Main.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/OpenGL.hpp>
+//#include <SFML/OpenGL.hpp>
+#include <glbinding/gl33core/gl.h>
+#include <glbinding/Binding.h>
 
 #include <glm/vec3.hpp>
 
 #include "core/types.hpp"
 
+#include "protocol.pb.h"
+
+#include <boost/asio.hpp>
+
 using wb::i32;
+using namespace gl33core;
 
 int main()
 {
+    boost::asio::io_service ioService;
+
+    boost::asio::ip::tcp::resolver resolver(ioService);
+
+    boost::asio::ip::tcp::acceptor acceptor(ioService);
+
     sf::Window window(sf::VideoMode(800, 600), "WorldBuilder", sf::Style::Default, sf::ContextSettings(24,8,4,3,3,sf::ContextSettings::Core));
+    glbinding::Binding::initialize(false);
+
     i32 c = 0;
 
     while (window.isOpen())
@@ -42,6 +57,8 @@ int main()
     glm::vec3 v(1,2,3);
 
     std::cout << v.x << " " << v.y << " " << v.z << std::endl;
+
+    std::cout << ioService.run() << std::endl;
 
     return 0;
 }
